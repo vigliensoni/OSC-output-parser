@@ -53,7 +53,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--listen-port",
         type=int,
-        default=11111,
+        default=12000,
         help="Port to bind for incoming OSC messages (default: %(default)s).",
     )
     parser.add_argument(
@@ -69,7 +69,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--target-port",
         type=int,
-        default=11112,
+        default=12001,
         help="Port to forward the split OSC messages to (default: %(default)s).",
     )
     parser.add_argument(

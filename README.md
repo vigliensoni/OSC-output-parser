@@ -1,8 +1,7 @@
 ## OSC parser
 
 Python middleware that listens for a stream of OSC messages that contain a list
-of numeric values (such as Wekinator's `'/wek/outputs'`) and re-emits each value as
-its own OSC message (e.g. `'/parsed/output-1' 0.1).
+of numeric values (such as Wekinator's `'/wek/outputs 0.1 0.2 0.3 0.4 0.5'`) and re-emits each value as its own OSC message (e.g. `'/parsed/output-1' 0.1`).
 
 ### Requirements
 
@@ -20,13 +19,13 @@ pip3 install -r requirements.txt
 
 ```bash
 python3 osc_parser.py \
-  --listen-port 11111 \
-  --target-port 11112 \
+  --listen-port 12000 \
+  --target-port 12001 \
   --listen-address /wek/outputs \
   --output-prefix /parsed/output-
 ```
 
-Listening defaults to `0.0.0.0:11111` and forwards to `127.0.0.1:11112`. Override the
+Listening defaults to `0.0.0.0:12000` and forwards to `127.0.0.1:12001`. Override the
 host/port/address/prefix via the CLI flags if needed (use `python osc_parser.py -h`
 to see the full list). Use `--quiet` to disable per-message logging.
 
