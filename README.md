@@ -44,3 +44,38 @@ and it will emit (to the configured target host/port) the messages
 /parsed/output-4 0.4
 /parsed/output-5 0.5
 ```
+
+### Reverse usage
+
+Use `osc_reassembler.py` to perform the opposite transformation (take sequential
+messages and re-emit a single payload):
+
+```bash
+python3 osc_reassembler.py \
+  --listen-port 12001 \
+  --target-port 12000 \
+  --input-prefix /parsed/output- \
+  --output-address /wek/outputs \
+  --value-count 5
+```
+
+Once running, send the script individual messages such as
+
+```
+/parsed/output-1 0.1
+/parsed/output-2 0.2
+/parsed/output-3 0.3
+/parsed/output-4 0.4
+/parsed/output-5 0.5
+```
+
+and it will emit
+
+```
+/wek/outputs 0.1 0.2 0.3 0.4 0.5
+```
+
+The reassembler remembers the most recent value for each index. After it has
+seen every index at least once, any subsequent message (even if it only updates a
+single index) immediately triggers a new `/wek/outputs` message containing the
+latest values.
